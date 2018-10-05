@@ -19,7 +19,7 @@ namespace TestMakerWeb.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string Text { get; set; }
-        public string Note { get; set; }
+        public string Notes { get; set; }
         [DefaultValue(0)]
         public int Type { get; set; }
         [DefaultValue(0)]

@@ -12,20 +12,20 @@ using System.Linq;
 namespace TestMakerWeb.Controllers
 {
     [Route("api/[controller]")]
-    public class QuestionController : Controller
+    public class AnswerController : Controller
     {
-        // GET: api/question/all
-        [HttpGet("All/{quizId}")]
-        public IActionResult All(int quizId)
+        // GET: api/Answer/all
+        [HttpGet("All/{questionId}")]
+        public IActionResult All(int questionId)
         {
-            var sampleQuestions = new List<QuestionViewModel>();
+            var sampleAnswers = new List<AnswerViewModel>();
 
-            //add a first sample question
-            sampleQuestions.Add(new QuestionViewModel()
+            //add a first sample answer
+            sampleAnswers.Add(new AnswerViewModel()
             {
                 Id = 1,
-                QuizId = quizId,
-                Text = "What do you value most in your life?",
+                QuestionId = questionId,
+                Text = "Friens and family",
                 CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now
             });
@@ -34,11 +34,11 @@ namespace TestMakerWeb.Controllers
             // add a bunch of other sample quizzes
             for (int i = 2; i <= 5; i++)
             {
-                sampleQuestions.Add(new QuestionViewModel()
+                sampleAnswers.Add(new AnswerViewModel()
                 {
                     Id = i,
-                    QuizId = quizId,
-                    Text = String.Format("Sample Question {0}",i),
+                    QuestionId = questionId,
+                    Text = String.Format("Sample Answer {0}", i),
                     CreatedDate = DateTime.Now,
                     LastModifiedDate = DateTime.Now
                 });
@@ -46,7 +46,7 @@ namespace TestMakerWeb.Controllers
 
             // output the result in JSON format
             return new JsonResult(
-                sampleQuestions,
+                sampleAnswers,
                 new JsonSerializerSettings()
                 {
                     Formatting = Formatting.Indented
@@ -54,4 +54,3 @@ namespace TestMakerWeb.Controllers
         }
     }
 }
-

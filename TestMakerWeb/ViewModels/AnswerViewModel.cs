@@ -3,28 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace TestMakerWeb.ViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class QuestionViewModel
+    public class AnswerViewModel
     {
         #region Constructor
-        public QuestionViewModel()
+        public AnswerViewModel()
         {
         }
         #endregion
         #region Properties
         public int Id { get; set; }
         public int QuizId { get; set; }
+        public int QuestionId { get; set; }
         public string Text { get; set; }
         public string Notes { get; set; }
         [DefaultValue(0)]
         public int Type { get; set; }
         [DefaultValue(0)]
         public int Flags { get; set; }
-        public string UserId { get; set; }
+        [DefaultValue(0)]
+        public string Value { get; set; }
         [JsonIgnore]
         public DateTime CreatedDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
