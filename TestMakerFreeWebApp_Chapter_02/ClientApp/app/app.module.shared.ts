@@ -9,6 +9,9 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizListComponent } from './components/quiz/quiz-list.component';
+import { AboutComponent } from './components/about/about.component';
+import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +19,10 @@ import { QuizListComponent } from './components/quiz/quiz-list.component';
         NavMenuComponent,
         HomeComponent,
         QuizListComponent,
-        QuizComponent
+        QuizComponent,
+        AboutComponent,
+        LoginComponent,
+        PageNotFoundComponent
         
     ],
     imports: [
@@ -26,7 +32,11 @@ import { QuizListComponent } from './components/quiz/quiz-list.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: '**', redirectTo: 'home' }
+            //Ensure to add new routing rules before ** global fallback
+            { path: 'quiz/:id', component: QuizComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'login', component: LoginComponent },
+            { path: '**', component: PageNotFoundComponent }
         ])
     ]
 })

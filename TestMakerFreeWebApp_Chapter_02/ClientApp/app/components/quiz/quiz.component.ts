@@ -9,7 +9,8 @@ import { HttpClient } from "@angular/common/http";
 })
 
 export class QuizComponent {
-    @Input() quiz: Quiz;
+    //@Input() quiz: Quiz;
+    quiz: Quiz;
 
     constructor(private activatedRoute: ActivatedRoute,
         private router: Router,
@@ -17,11 +18,12 @@ export class QuizComponent {
         @Inject('BASE_URL') private baseUrl: string) {
 
         // create an empty object from the Quiz interface
-        this.quiz = <Quiz>{};
+        //this.quiz = <Quiz>{};
 
         var id = +this.activatedRoute.snapshot.params["id"];
         console.log(id);
         if (id) {
+            
             var url = this.baseUrl + "api/quiz/" + id;
 
             this.http.get<Quiz>(url).subscribe(result => {
