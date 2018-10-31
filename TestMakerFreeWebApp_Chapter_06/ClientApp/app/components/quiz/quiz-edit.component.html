@@ -2,17 +2,17 @@
     <h2>{{title}}</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group"
-             [ngClass]="{'has-error has-feedback': form.get('Title').errors?.required}">
+             [ngClass]="{'has-error has-feedback': hasError('Title')}">
             <label for="title">Quiz title:</label>
             <br />
             <input type="text" id="title"
                    formControlName="Title" required
                    placeholder="choose a title..."
                    class="form-control" />
-            <span *ngIf="form.get('Title').errors?.required"
+            <span *ngIf="hasError('Title')"
                   class="glyphicon glyphicon-remove form-control-feedback"
                   aria-hidden="true"></span>
-            <div *ngIf="(form.get('Title').dirty || form.get('Title').touched) && form.get('Title').errors?.required"
+            <div *ngIf="hasError('Title')"
                  class="help-block">
                 Title is a required field: please insert a valid title.
             </div>
