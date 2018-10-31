@@ -1,4 +1,5 @@
 ﻿import { Component, Inject, OnInit } from "@angular/core";
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 
@@ -11,6 +12,8 @@ import { HttpClient } from "@angular/common/http";
 export class QuestionEditComponent {
     title: string;
     question: Question;
+    form: FormGroup;
+    activityLog: string;
 
     // this will be TRUE when editing an existing question, 
     //   FALSE when creating a new one.
@@ -44,12 +47,23 @@ export class QuestionEditComponent {
         }
     }
 
-    onSubmit(question: Question) {
+    onSubmit() {
+
+        // build a temporary question object from form values
+        var tempQuestion = <Question>{};
+        tempQuestion.Text = this.form.value.Text;
+        tempQuestion.QuizId = this.question.QuizId;
+
         var url = this.baseUrl + "api/question";
 
         if (this.editMode) {
+
+            // don't forget to set the tempQuestion Id,
+            //   otherwise the EDIT would fail!
+            tempQuestion.Id = this.question.Id;
+
             this.http
-                .post<Question>(url, question)
+                .post<Question>(url, tempQuestion)
                 .subscribe(res => {
                     var v = res;
                     console.log("Question " + v.Id + " has been updated.");
@@ -58,7 +72,7 @@ export class QuestionEditComponent {
         }
         else {
             this.http
-                .put<Question>(url, question)
+                .put<Question>(url, tempQuestion)
                 .subscribe(res => {
                     var v = res;
                     console.log("Question " + v.Id + " has been created.");
